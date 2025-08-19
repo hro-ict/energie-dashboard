@@ -63,16 +63,19 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
     <div className="container ">
 
         <div className="text-center mb-4 py-3">
-        <h2 className="fw-bold text-primary mb-2">⚡ Enerji Dashboard</h2>
+          <span className="badge bg-warning">
+ <h2 className="fw-bold text-primary mb-2"> Energy Dashboard</h2>
+          </span>
+       
   
       </div>
       {!selectedChart ? (
         <div className="row g-3">
           {/* Elektrik */}
-          <div className="col-6 col-md-3">
+          <div className="col-6 col-md-3 ">
             <div
-              className="card p-3 shadow-sm text-center d-flex justify-content-center align-items-center"
-              style={{ cursor: "pointer" }}
+              className="card p-3 shadow-sm text-center  d-flex justify-content-center align-items-center"
+              style={{ cursor: "pointer", backgroundColor: 'rgba(200, 230, 201, 0.5)'}}
               onClick={() => setSelectedChart("electric")}
             >
               <img src={elektrik} alt="Açıklama" width={50} height={50} />
@@ -84,8 +87,8 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
           {/* Gaz */}
           <div className="col-6 col-md-3">
             <div
-              className="card p-3 shadow-sm text-center d-flex justify-content-center align-items-center"
-              style={{ cursor: "pointer" }}
+              className="card p-3 shadow-sm text-center d-flex  justify-content-center align-items-center"
+              style={{ cursor: "pointer", backgroundColor: 'rgba(245, 221, 39, 0.5)' }}
               onClick={() => setSelectedChart("gas")}
             >
               <img src={gas} alt="Açıklama" width={50} height={50} />
@@ -98,7 +101,7 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
           <div className="col-6 col-md-3">
             <div className="card p-3 shadow-sm text-center d-flex justify-content-center align-items-center"
             
-             style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", backgroundColor: 'rgba(39, 245, 39, 0.5)' }}
               onClick={() => setSelectedChart("return_")}
             
             >
@@ -110,7 +113,10 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
 
           {/* Tarife */}
           <div className="col-6 col-md-3">
-            <div className="card p-3 shadow-sm text-center d-flex justify-content-center align-items-center">
+            <div className="card p-3 shadow-sm text-center d-flex justify-content-center align-items-center"
+                  style={{ cursor: "pointer", backgroundColor: 'rgba(245, 39, 77, 0.5)' }}
+            >
+            
               <img src={tarife} alt="Açıklama" width={50} height={50} />
               {/* <div className="text-small ">Tarife</div> */}
              <div className="fw-bold h2 mt-4">{data.tarife}</div>

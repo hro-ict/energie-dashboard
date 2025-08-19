@@ -12,6 +12,14 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnData }) => {
 
 
+
+
+
+///timestamp
+
+
+//timestamp
+
   console.log("Elecytrik data:", electricityData)
 
 
@@ -81,6 +89,7 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
               <img src={elektrik} alt="Açıklama" width={50} height={50} />
               {/* <div className="text-small">Elektrik</div> */}
               <div className="fw-bold h2 mt-4">{data.elektrik}  </div>
+              
             </div>
           </div>
 
@@ -138,6 +147,18 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
           )}
         </div>
       )}
+
+<div className="mt-5 text-center">
+<small className="text-muted fst-italic">
+  🕐 Last update :{" "}
+  <span className="fw-bold">
+    {((new Date() - new Date(data.timestamp)) / (1000 * 60)).toFixed(0)}
+  </span>{" "}
+  minutes ago
+</small>
+
+</div>
+     
     </div>
   );
 });

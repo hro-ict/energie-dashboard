@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import gas from "../Img/gs.png";
 import elektrik from "../Img/elektrik.png";
-import tarife from "../Img/taife.png";
+// import tarife from "../Img/taife.png";
 import return_ from "../Img/return.png";
+import pm25 from "../Img/pm25.PNG";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CanvasJSReact from "../canvas/canvas"
 
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnData }) => {
+const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnData, pm25Data }) => {
 
 
 
@@ -126,9 +127,10 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
                   style={{ cursor: "pointer", backgroundColor: 'rgba(245, 39, 77, 0.5)' }}
             >
             
-              <img src={tarife} alt="Açıklama" width={50} height={50} />
+              <img src={pm25} alt="Açıklama" width={50} height={50} />
               {/* <div className="text-small ">Tarife</div> */}
-             <div className="fw-bold h2 mt-4">{data.tarife}</div>
+             <div className="fw-bold h2 mt-4">{pm25Data.value}</div>
+            
             </div>
           </div>
         </div>

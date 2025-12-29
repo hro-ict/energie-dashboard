@@ -18,6 +18,7 @@ function App() {
   const [week_elektrik, setWeekelektrik]= useState([])
   const [week_gaz, setWeekgaz]= useState([])
   const[week_return, setWeekreturn]= useState([])
+  const [pm25_data, setPM25Data]= useState([])
 
 
 useEffect(() => {
@@ -30,6 +31,7 @@ useEffect(() => {
   const refToday = doc(db, "p1", formatted);
   const refElektrik = doc(db, "p1", "week_elektrik");
   const refGaz = doc(db, "p1", "week_gaz");
+  const refPM25 = doc(db, "p1", "pm2.5");
 
   const refReturn = doc(db, "p1", "week_return");
 
@@ -120,12 +122,29 @@ updatedData_return.forEach(obj => {
     }
   });
 
+
+//pm2.5
+
+ const unsubPM25 = onSnapshot(refPM25, (snapshot) => {
+    console.log("PM25 snapshot:", snapshot);
+    if (snapshot.exists()) {
+      const data_pm25 = snapshot.data()
+      console.log("PM25:", data_pm25.value);
+      setPM25Data(data_pm25);
+
+
+    } else {
+      console.log("PM25 verisi bulunamadı");
+    }
+  });
+
   // cleanup
   return () => {
     unsubToday();
     unsubElektrik();
     unsubGaz();
     unsubReturn();
+    unsubPM25();
   };
 }, []);
 
@@ -137,6 +156,7 @@ updatedData_return.forEach(obj => {
         electricityData= {week_elektrik}
         gasData = {week_gaz}
         returnData= {week_return}
+         pm25Data={pm25_data}
         
         />
     </div>

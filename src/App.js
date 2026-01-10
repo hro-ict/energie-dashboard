@@ -19,6 +19,8 @@ function App() {
   const [week_gaz, setWeekgaz]= useState([])
   const[week_return, setWeekreturn]= useState([])
   const [pm25_data, setPM25Data]= useState([])
+   const [sds011_pm25Data, setsds011_pm25Data]= useState([])
+   //const [sds011_pm10Data, setsds011_pm10Data]= useState([])
 
 
 useEffect(() => {
@@ -32,6 +34,7 @@ useEffect(() => {
   const refElektrik = doc(db, "p1", "week_elektrik");
   const refGaz = doc(db, "p1", "week_gaz");
   const refPM25 = doc(db, "p1", "pm2.5");
+  const refSDS011PM25= doc(db, "p1", "sds011_pm25");
 
   const refReturn = doc(db, "p1", "week_return");
 
@@ -138,6 +141,25 @@ updatedData_return.forEach(obj => {
     }
   });
 
+
+//sds011 pm25
+
+ const unsubSDS011PM25 = onSnapshot(refSDS011PM25, (snapshot) => {
+    console.log("PM25 snapshot:", snapshot);
+    if (snapshot.exists()) {
+      const data_sds011pm25 = snapshot.data()
+      console.log("PM25:", data_sds011pm25.value);
+      setsds011_pm25Data(data_sds011pm25);
+
+
+    } else {
+      console.log("PM25 verisi bulunamadı");
+    }
+  });
+
+
+
+
   // cleanup
   return () => {
     unsubToday();
@@ -145,6 +167,7 @@ updatedData_return.forEach(obj => {
     unsubGaz();
     unsubReturn();
     unsubPM25();
+    unsubSDS011PM25();
   };
 }, []);
 
@@ -157,6 +180,7 @@ updatedData_return.forEach(obj => {
         gasData = {week_gaz}
         returnData= {week_return}
          pm25Data={pm25_data}
+         sds011_pm25Data= {sds011_pm25Data}
         
         />
     </div>

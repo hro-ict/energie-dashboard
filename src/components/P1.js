@@ -10,7 +10,7 @@ import CanvasJSReact from "../canvas/canvas"
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnData, pm25Data }) => {
+const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnData, pm25Data, sds011_pm25Data }) => {
 
 
 
@@ -132,6 +132,27 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
              <div className="fw-bold h2 mt-4">{pm25Data.value}</div>
             
             </div>
+
+
+            
+          </div>
+
+             <div className="col-6 col-md-3">
+            <div className="card p-3 shadow-sm text-center d-flex justify-content-center align-items-center"
+                  style={{ cursor: "pointer", backgroundColor: 'rgba(245, 39, 77, 0.5)' }}
+            >
+            
+              <img src={pm25} alt="Açıklama" width={50} height={50} />
+              
+              {/* <div className="text-small ">Tarife</div> */}
+             <div className="fw-bold h2 mt-4">{sds011_pm25Data.value}</div>
+             
+             <span>{sds011_pm25Data.time}</span>
+            
+            </div>
+
+
+            
           </div>
         </div>
       ) : (

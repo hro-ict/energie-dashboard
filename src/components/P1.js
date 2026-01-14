@@ -27,8 +27,8 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
   const [selectedChart, setSelectedChart] = useState(null);
 
   const chartMap = {
-    electric: { color: "#f59e0b", data: electricityData, unit: "kWh", title: "Haftalik Elektrik Kullanimi" },
-    gas: { color: "#ef4444", data: gasData, unit: "m³", title: "Haftalik Gaz Kullanimi" },
+    electric: { color: "#f59e0b", data: electricityData, unit: "kWh", title: "Weekly Electricity Usage" },
+    gas: { color: "#ef4444", data: gasData, unit: "m³", title: "Weekly Gas Usage" },
 
     return_: { color: "#444fefff", data: returnData, unit: "kWh", title: "Haftalik Return" },
 
@@ -177,13 +177,14 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
 
           {/* Weekly Usage Table */}
           <div className="mt-4">
-            <h5 className="text-center mb-3">Haftalık Kullanım Detayları</h5>
+            <h5 className="text-center mb-3">Weekly Usage Details</h5>
             <div className="table-responsive">
               <table className="table table-striped table-hover">
                 <thead className="table-dark">
                   <tr>
-                    <th>Tarih</th>
-                    <th>Kullanım ({chartMap[selectedChart].unit})</th>
+                    <th>Day</th>
+                    <th>Usage ({chartMap[selectedChart].unit})</th>
+                    <th>Price</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -191,14 +192,18 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
                     <tr key={index}>
                       <td>{item.label}</td>
                       <td className="fw-bold">{item.y} {chartMap[selectedChart].unit}</td>
+                      <td>€{item.price}</td>
                     </tr>
                   ))}
                 </tbody>
                 <tfoot className="table-light">
                   <tr>
-                    <td className="fw-bold">Toplam</td>
+                    <td className="fw-bold">Total</td>
                     <td className="fw-bold text-primary">
                       {chartMap[selectedChart].data.reduce((sum, item) => sum + item.y, 0).toFixed(2)} {chartMap[selectedChart].unit}
+                    </td>
+                      <td className="fw-bold text-primary">
+                      €{chartMap[selectedChart].data.reduce((sum, item) => sum + item.price, 0).toFixed(2)} 
                     </td>
                   </tr>
                 </tfoot>

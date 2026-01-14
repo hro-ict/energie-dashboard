@@ -59,7 +59,7 @@ useEffect(() => {
   return {
     y: usage,
     label: day,
-    indexLabel: String(usage),
+    indexLabel: day,
     ...rest
   };
 });
@@ -78,15 +78,10 @@ useEffect(() => {
   return {
     y: usage,
     label: day,
+    indexLabel: day,
     ...rest
   };
 });
-
-updatedData_gas.forEach(obj => {
-  obj.indexLabel = obj.label;  
-
-});
-
 
       setWeekgaz(updatedData_gas);
     } else {
@@ -104,15 +99,10 @@ updatedData_gas.forEach(obj => {
   return {
     y: usage,
     label: day,
+    indexLabel: day,
     ...rest
   };
 });
-
-updatedData_return.forEach(obj => {
-  obj.indexLabel = obj.label;  
-
-});
-
 
       setWeekreturn(updatedData_return);
     } else {

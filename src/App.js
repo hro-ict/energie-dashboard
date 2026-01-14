@@ -59,14 +59,9 @@ useEffect(() => {
   return {
     y: usage,
     label: day,
+    indexLabel: String(usage),
     ...rest
   };
-});
-
-updatedData.forEach(obj => {
-  obj.indexLabel = obj.label;  
-  obj.label= ""
-
 });
 
       setWeekelektrik(updatedData);

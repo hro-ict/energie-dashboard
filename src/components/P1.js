@@ -90,6 +90,7 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
               <img src={elektrik} alt="Açıklama" width={50} height={50} />
               {/* <div className="text-small">Elektrik</div> */}
               <div className="fw-bold h2 mt-4">{data.elektrik}  </div>
+              <span className="">€{data.elektrik_price}</span>
               
             </div>
           </div>
@@ -104,6 +105,7 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
               <img src={gas} alt="Açıklama" width={50} height={50} />
               {/* <div className="text-small">Gaz</div> */}
               <div className="fw-bold h2 mt-4">{data.gaz} </div>
+              <span className="">€{data.gas_price}</span>
             </div>
           </div>
 
@@ -118,6 +120,7 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
               <img src={return_} alt="Açıklama" width={50} height={50} />
               {/* <div className="text-small">Return</div> */}
               <div className="fw-bold h2 mt-4">{data.return}</div>
+               <span className="">€0</span>
             </div>
           </div>
 
@@ -130,6 +133,7 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
               <img src={pm25} alt="Açıklama" width={50} height={50} />
               {/* <div className="text-small ">Tarife</div> */}
              <div className="fw-bold h2 mt-4">{pm25Data.value}</div>
+               <span className="">{pm25Data.time}</span>
             
             </div>
 
@@ -156,18 +160,51 @@ const UtilityDashboard = React.memo(({ data, electricityData, gasData, returnDat
           </div>
         </div>
       ) : (
-        <div
-         onClick={() => setSelectedChart(null)}
+        <div>
+          <div
+           onClick={() => setSelectedChart(null)}
 
-          style={{ cursor: "pointer"}}
-        >
-          {options && (
-            <CanvasJSChart
-              options={options}
-              containerProps={{ width: '100%', height: '300px' }}
-             
-            />
-          )}
+            style={{ cursor: "pointer"}}
+          >
+            {options && (
+              <CanvasJSChart
+                options={options}
+                containerProps={{ width: '100%', height: '300px' }}
+               
+              />
+            )}
+          </div>
+
+          {/* Weekly Usage Table */}
+          <div className="mt-4">
+            <h5 className="text-center mb-3">Haftalık Kullanım Detayları</h5>
+            <div className="table-responsive">
+              <table className="table table-striped table-hover">
+                <thead className="table-dark">
+                  <tr>
+                    <th>Tarih</th>
+                    <th>Kullanım ({chartMap[selectedChart].unit})</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {chartMap[selectedChart].data.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.label}</td>
+                      <td className="fw-bold">{item.y} {chartMap[selectedChart].unit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot className="table-light">
+                  <tr>
+                    <td className="fw-bold">Toplam</td>
+                    <td className="fw-bold text-primary">
+                      {chartMap[selectedChart].data.reduce((sum, item) => sum + item.y, 0).toFixed(2)} {chartMap[selectedChart].unit}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
         </div>
       )}
 
